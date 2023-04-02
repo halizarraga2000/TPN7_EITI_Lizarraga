@@ -66,7 +66,7 @@
 #define STACK_SIZE 256
 
 /** Cantidad de tareas */
-#define TASK_COUNT 2
+#define TASK_COUNT 3
 
 /** Valor de la cuenta para la función de espera */
 #define COUNT_DELAY 3000000
@@ -144,6 +144,9 @@ void TareaA(void);
 /** @brief Función que implementa la segunda tarea del sistema */
 void TareaB(void);
 
+/** @brief Función que implementa la tercera tarea del sistema */
+void TareaC(void);
+
 /* === Definiciones de variables internas ================================== */
 
 /** Espacio para la pila de las tareas */
@@ -219,6 +222,16 @@ void TareaB(void) {
     while (1) {
         DigitalOutputToggle(board->led_amarillo);
         Delay();
+    }
+}
+
+void TareaC(void){
+    while (1) {
+        if (DigitalInputGetState(board->boton_cambiar)) {
+            DigitalOutputActivate(board->led_azul);  //Comparta el led Azul
+        } else {
+            DigitalOutputDeactivate(board->led_azul);
+        }
     }
 }
 
